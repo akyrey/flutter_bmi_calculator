@@ -21,6 +21,14 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
 
+  void toggleGenderSelection(Gender gender) {
+    if (this.selectedGender == gender) {
+      this.selectedGender = null;
+    } else {
+      this.selectedGender = gender;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +51,7 @@ class _InputPageState extends State<InputPage> {
                     ),
                     onTap: () {
                       setState(() {
-                        selectedGender = Gender.male;
+                        this.toggleGenderSelection(Gender.male);
                       });
                     },
                   ),
@@ -59,7 +67,7 @@ class _InputPageState extends State<InputPage> {
                     ),
                     onTap: () {
                       setState(() {
-                        selectedGender = Gender.female;
+                        this.toggleGenderSelection(Gender.female);
                       });
                     },
                   ),
