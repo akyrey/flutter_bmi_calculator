@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/constants.dart';
+import 'package:bmi_calculator/counter.dart';
 import 'package:bmi_calculator/height_scroll.dart';
 import 'package:bmi_calculator/icon_content.dart';
 import 'package:bmi_calculator/reusable_card.dart';
@@ -83,10 +84,24 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(color: kActiveCardColor),
+                  child: ReusableCard(
+                    color: kActiveCardColor,
+                    child: Counter(
+                      label: 'WEIGHT',
+                      unitLabel: 'kg',
+                      initialValue: 50,
+                    ),
+                  ),
                 ),
                 Expanded(
-                  child: ReusableCard(color: kActiveCardColor),
+                  child: ReusableCard(
+                    color: kActiveCardColor,
+                    child: Counter(
+                      label: 'AGE',
+                      unitLabel: 'years',
+                      initialValue: 20,
+                    ),
+                  ),
                 ),
               ],
             ),
