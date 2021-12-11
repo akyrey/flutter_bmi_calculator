@@ -18,9 +18,12 @@ class ResultsPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            'Your Result',
-            style: kTitleTextStyle,
+          Container(
+            padding: EdgeInsets.all(15.0),
+            child: Text(
+              'Your Result',
+              style: kTitleTextStyle,
+            ),
           ),
           Expanded(
             child: ReusableCard(
