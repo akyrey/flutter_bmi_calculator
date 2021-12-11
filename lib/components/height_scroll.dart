@@ -2,6 +2,10 @@ import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
 
 class HeightScroll extends StatefulWidget {
+  final ValueChanged<int> onValueChange;
+
+  HeightScroll({this.onValueChange});
+
   @override
   _HeightScrollState createState() => _HeightScrollState();
 }
@@ -42,13 +46,14 @@ class _HeightScrollState extends State<HeightScroll> {
               overlayColor: Color(0x29EB1555),
               overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0)),
           child: Slider(
-              value: height.toDouble(),
+              value: this.height.toDouble(),
               min: 120.0,
               max: 240.0,
               onChanged: (double value) {
                 setState(() {
-                  height = value.round();
+                  this.height = value.round();
                 });
+                widget.onValueChange(this.height);
               }),
         ),
       ],

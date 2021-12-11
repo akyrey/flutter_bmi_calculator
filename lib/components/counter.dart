@@ -7,9 +7,14 @@ class Counter extends StatefulWidget {
   final String label;
   final String unitLabel;
   final int initialValue;
+  final ValueChanged<int> onValueChange;
 
-  Counter(
-      {@required this.label, @required this.unitLabel, this.initialValue = 0});
+  Counter({
+    @required this.label,
+    @required this.unitLabel,
+    this.initialValue = 0,
+    this.onValueChange,
+  });
 
   @override
   _CounterState createState() => _CounterState();
@@ -55,6 +60,7 @@ class _CounterState extends State<Counter> {
                 setState(() {
                   this.value--;
                 });
+                widget.onValueChange(this.value);
               },
             ),
             SizedBox(
@@ -66,6 +72,7 @@ class _CounterState extends State<Counter> {
                 setState(() {
                   this.value++;
                 });
+                widget.onValueChange(this.value);
               },
             ),
           ],

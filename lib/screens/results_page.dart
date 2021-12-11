@@ -5,6 +5,16 @@ import 'package:flutter/material.dart';
 import '../components/bottom_button.dart';
 
 class ResultsPage extends StatelessWidget {
+  final String bmiResult;
+  final String resultText;
+  final String interpretation;
+
+  ResultsPage({
+    @required this.bmiResult,
+    @required this.resultText,
+    @required this.interpretation,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +43,7 @@ class ResultsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Overweight',
+                    this.resultText,
                     style: kResultTextStyle,
                   ),
                   Row(
@@ -42,7 +52,7 @@ class ResultsPage extends StatelessWidget {
                     textBaseline: TextBaseline.alphabetic,
                     children: [
                       Text(
-                        '18.2',
+                        this.bmiResult,
                         style: kBMITextStyle,
                       ),
                       Text(
@@ -52,8 +62,9 @@ class ResultsPage extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    'Some text',
+                    this.interpretation,
                     style: kBodyTextStyle,
+                    textAlign: TextAlign.center,
                   ),
                 ],
               ),

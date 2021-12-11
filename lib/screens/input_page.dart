@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/calculator_brain.dart';
 import 'package:bmi_calculator/components/bottom_button.dart';
 import 'package:bmi_calculator/components/counter.dart';
 import 'package:bmi_calculator/components/height_scroll.dart';
@@ -20,6 +21,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
+  CalculatorBrain calc = CalculatorBrain(height: 180, weight: 50);
 
   void toggleGenderSelection(Gender gender) {
     if (this.selectedGender == gender) {
@@ -82,7 +84,9 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: ReusableCard(
               color: kActiveCardColor,
-              child: HeightScroll(),
+              child: HeightScroll(onValueChange: (height) {
+                this.calc.height = height;
+              }),
             ),
           ),
           Expanded(
@@ -92,10 +96,12 @@ class _InputPageState extends State<InputPage> {
                   child: ReusableCard(
                     color: kActiveCardColor,
                     child: Counter(
-                      label: 'WEIGHT',
-                      unitLabel: 'kg',
-                      initialValue: 50,
-                    ),
+                        label: 'WEIGHT',
+                        unitLabel: 'kg',
+                        initialValue: 50,
+                        onValueChange: (weight) {
+                          this.calc.weight = weight;
+                        }),
                   ),
                 ),
                 Expanded(
@@ -105,6 +111,9 @@ class _InputPageState extends State<InputPage> {
                       label: 'AGE',
                       unitLabel: 'years',
                       initialValue: 20,
+                      onValueChange: (age) {
+                        // TODO not used?
+                      },
                     ),
                   ),
                 ),
@@ -115,7 +124,13 @@ class _InputPageState extends State<InputPage> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ResultsPage()),
+                MaterialPageRoute(
+                  builder: (context) => ResultsPage(
+                    bmiResult: this.calc.calculateBMI(),
+                    resultText: this.calc.getResult(),
+                    interpretation: this.calc.getInterpretation(),
+                  ),
+                ),
               );
             },
             text: 'CALCULATE',
